@@ -1,0 +1,100 @@
+<title>Prueba</title>
+Primer script:
+<!-- JQuery Validate library || la librería va después del titulo de tu pagina osea en el inicio -->
+ 	 <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+
+Segundo script:
+ <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+
+
+Debemos de agregar in id en el form del formulario, que llamaremos en la funcion, ejemplo id="form"
+dato: debes de agregar también el metodo post en el form al igual que el id. 
+Nota: el script por recomendación deberá de ir en la parte de abajo. 
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+<--Aqui usamos el id que esta en el form-->
+$("#form").validate({
+});
+});
+</script>
+
+
+Paso2: Nota: el id y el name del formulario es recomendable poner el mismo. 
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+<!--Aqui usamos el id que esta en el form-->
+$("#form").validate({
+         rules:{
+<!--utilizamos el objeto de nombre para ponerle un requerido, este campo va en el input del formulario en 
+donde venga el nombre, con el id y name como nombre-->
+
+            nombre:{
+               required:true
+              }
+
+         },
+
+         messages:{
+
+
+         }
+   });
+});
+</script>
+
+<!--utilizamos un message en el mismo campo-->
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	$( "#form" ).validate({
+		rules:{
+			nombre :{
+				 required: true
+			}
+
+		},
+
+		messages:{
+			nombre :{
+				 required: "Escribe un nombre"
+			}
+		}
+	});
+});
+</script>
+
+Regla personalizada: va dentro del script 
+jQuery.validator.addMethod("solo_letras_espacios", function(value, element) {
+      return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+  }, "Sólo letras y espacios");
+
+Practica:
+
+<script type="text/javascript">
+	jQuery.validator.addMethod("solo_letras_espacios", function(value, element) {
+      return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+  }, "Sólo letras y espacios");
+
+$(document).ready(function() {
+	
+	$( "#form" ).validate({
+		rules:{
+			nombre :{
+				 required: true,
+				 solo_letras_espacios: true
+			}
+
+		},
+
+		messages:{
+			nombre :{
+				 required: "<div class='alert alert-danger' role='alert'> <b> Debe ingresar un nombre</b> </div>",
+				 solo_letras_espacios: "<div class='alert alert-danger' role='alert'> <b> Elnombre solo debe tener letras</b> </div>"
+			}
+		}
+	});
+});
+</script>
